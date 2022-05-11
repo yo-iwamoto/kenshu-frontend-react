@@ -34,9 +34,9 @@ function App(props) {
       </div>
       <h2 id='list-heading'>3 tasks remaining</h2>
       <ul role='list' className='todo-list stack-large stack-exception' aria-labelledby='list-heading'>
-        <Todo />
-        <Todo />
-        <Todo />
+        <Todo name='Eat' completed={true} />
+        <Todo name='Sleep' completed={true} />
+        <Todo name='Repeat' completed={true} />
       </ul>
     </div>
   );
