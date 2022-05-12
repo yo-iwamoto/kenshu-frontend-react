@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import type { FC } from 'react';
-import type { FormEvent } from 'react';
+import type { FC, ChangeEvent, FormEvent } from 'react';
 
 type Props = {
   addTask: (name: string) => void;
@@ -14,6 +13,10 @@ const Form: FC<Props> = (props) => {
     props.addTask('Say hello!');
   }
 
+  function handleChange({ target: { value } }: ChangeEvent<HTMLInputElement>) {
+    setName(value);
+  }
+
   return (
     <form onSubmit={handleSubmit}>
       <h2 className='label-wrapper'>
@@ -21,7 +24,15 @@ const Form: FC<Props> = (props) => {
           What needs to be done?
         </label>
       </h2>
-      <input type='text' id='new-todo-input' className='input input__lg' name='text' autoComplete='off' value={name} />
+      <input
+        type='text'
+        id='new-todo-input'
+        className='input input__lg'
+        name='text'
+        autoComplete='off'
+        value={name}
+        onChange={handleChange}
+      />
       <button type='submit' className='btn btn__primary btn__lg'>
         Add
       </button>
