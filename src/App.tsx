@@ -21,7 +21,34 @@ function App(props: Props) {
     setTasks([...tasks, newTask]);
   }
 
-  const taskList = tasks.map((task) => <Todo id={task.id} name={task.name} completed={task.completed} key={task.id} />);
+  function toggleTaskCompleted(id: string) {
+    const updatedTasks = tasks.map((task) => {
+      if (id === task.id) {
+        return {
+          ...task,
+          completed: !task.completed,
+        };
+      }
+
+      return task;
+    });
+
+    setTasks(updatedTasks);
+  }
+
+  const taskList = tasks.map((task) => (
+    <Todo
+      id={task.id}
+      name={task.name}
+      completed={task.completed}
+      key={task.id}
+      toggleTaskCompleted={toggleTaskCompleted}
+    />
+  ));
+
+  const tasksNoun = taskList.length !== 1 ? 'tasks' : 'task';
+
+  const headingText = `${taskList.length} ${tasksNoun} remaining`;
 
   return (
     <div className='todoapp stack-large'>
@@ -32,7 +59,7 @@ function App(props: Props) {
         <FilterButton />
         <FilterButton />
       </div>
-      <h2 id='list-heading'>3 tasks remaining</h2>
+      <h2 id='list-heading'>{headingText}</h2>
       {/* eslint-disable-next-line jsx-a11y/no-redundant-roles */}
       <ul role='list' className='todo-list stack-large stack-exception' aria-labelledby='list-heading'>
         {taskList}
