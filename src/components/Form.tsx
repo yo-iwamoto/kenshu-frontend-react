@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { FC } from 'react';
 import type { FormEvent } from 'react';
 
@@ -6,6 +7,8 @@ type Props = {
 };
 
 const Form: FC<Props> = (props) => {
+  const [name, setName] = useState('');
+
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     props.addTask('Say hello!');
@@ -18,7 +21,7 @@ const Form: FC<Props> = (props) => {
           What needs to be done?
         </label>
       </h2>
-      <input type='text' id='new-todo-input' className='input input__lg' name='text' autoComplete='off' />
+      <input type='text' id='new-todo-input' className='input input__lg' name='text' autoComplete='off' value={name} />
       <button type='submit' className='btn btn__primary btn__lg'>
         Add
       </button>
