@@ -3,6 +3,7 @@ import Form from './components/Form';
 import FilterButton from './components/FilterButton';
 import type { Task } from './types/Task';
 import { useState } from 'react';
+import { nanoid } from 'nanoid';
 
 type Props = {
   tasks: Task[];
@@ -14,7 +15,7 @@ function App(props: Props) {
   function addTask(name: string) {
     const newTask = {
       name,
-      id: 'id',
+      id: `todo-${nanoid()}`,
       completed: false,
     };
     setTasks([...tasks, newTask]);
