@@ -3,6 +3,7 @@ import type { Task } from '../types/Task';
 
 type Props = Task & {
   toggleTaskCompleted: (id: string) => void;
+  deleteTask: (id: string) => void;
 };
 
 const Todo: FC<Props> = (props) => {
@@ -23,7 +24,7 @@ const Todo: FC<Props> = (props) => {
         <button type='button' className='btn'>
           Edit <span className='visually-hidden'>{props.name}</span>
         </button>
-        <button type='button' className='btn btn__danger'>
+        <button type='button' className='btn btn__danger' onClick={() => props.deleteTask(props.id)}>
           Delete <span className='visually-hidden'>{props.name}</span>
         </button>
       </div>
