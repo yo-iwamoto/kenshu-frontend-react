@@ -19,6 +19,10 @@ const Todo: FC<Props> = (props) => {
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     props.editTask(props.id, newName);
+    cancelEditing();
+  }
+
+  function cancelEditing() {
     setNewName('');
     setIsEditing(false);
   }
@@ -32,7 +36,7 @@ const Todo: FC<Props> = (props) => {
         <input id={props.id} className='todo-text' type='text' value={newName} onChange={handleChange} />
       </div>
       <div className='btn-group'>
-        <button type='button' className='btn todo-cancel'>
+        <button type='button' className='btn todo-cancel' onClick={() => cancelEditing()}>
           Cancel
           <span className='visually-hidden'>renaming {props.name}</span>
         </button>
