@@ -8,13 +8,14 @@ type Props = {
 const Form: FC<Props> = (props) => {
   const [name, setName] = useState('');
 
-  function handleSubmit(e: FormEvent) {
-    e.preventDefault();
-    props.addTask('Say hello!');
-  }
-
   function handleChange({ target: { value } }: ChangeEvent<HTMLInputElement>) {
     setName(value);
+  }
+
+  function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    props.addTask(name);
+    setName('');
   }
 
   return (
