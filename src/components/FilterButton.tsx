@@ -1,9 +1,10 @@
 import type { FC } from 'react';
+import type { FilterName } from '../lib/filter';
 
 type Props = {
-  name: string;
+  name: FilterName;
   isPressed: boolean;
-  setFilter: (name: string) => void;
+  setFilter: (name: FilterName) => void;
 };
 
 const FilterButton: FC<Props> = (props) => {

@@ -4,14 +4,8 @@ import FilterButton from './components/FilterButton';
 import type { Task } from './types/Task';
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
-
-const FILTER_MAP = {
-  All: () => true,
-  Active: (task: Task) => !task.completed,
-  Completed: (task: Task) => task.completed,
-};
-
-const FILTER_NAMES = Object.keys(FILTER_MAP);
+import { FILTER_MAP } from './lib/filter';
+import type { FilterName } from './lib/filter';
 
 type Props = {
   tasks: Task[];
@@ -64,7 +58,7 @@ function App(props: Props) {
     setTasks(editedTasks);
   }
 
-  const [filter, setFilter] = useState('All');
+  const [filter, setFilter] = useState<FilterName>('all');
 
   const taskList = tasks
     .filter(FILTER_MAP[filter])
@@ -80,7 +74,7 @@ function App(props: Props) {
       />
     ));
 
-  const filterList = FILTER_NAMES.map((name) => (
+  const filterList = (Object.keys(FILTER_MAP) as FilterName[]).map((name) => (
     <FilterButton key={name} name={name} isPressed={name === filter} setFilter={setFilter} />
   ));
 
