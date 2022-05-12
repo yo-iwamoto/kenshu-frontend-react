@@ -2,16 +2,8 @@ import type { ChangeEvent, FC, FormEvent } from 'react';
 import { useEffect } from 'react';
 import { useRef } from 'react';
 import { useState } from 'react';
+import { usePrevious } from '../hooks/usePrevious';
 import type { Task } from '../types/Task';
-
-function usePrevious(value: boolean) {
-  const ref = useRef<boolean>();
-  useEffect(() => {
-    ref.current = value;
-  }, [value]);
-
-  return ref.current;
-}
 
 type Props = Task & {
   toggleTaskCompleted: (id: string) => void;
@@ -42,7 +34,7 @@ const Todo: FC<Props> = (props) => {
   const editButtonRef = useRef<HTMLButtonElement>(null);
 
   console.log(isEditing);
-  const wasEditingBefore = usePrevious(isEditing);
+  const wasEditingBefore = usePrevious<boolean>(isEditing);
 
   useEffect(() => {
     console.log(wasEditingBefore);
