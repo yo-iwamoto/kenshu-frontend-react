@@ -33,6 +33,7 @@ function App(props: Props) {
         <FilterButton />
       </div>
       <h2 id='list-heading'>3 tasks remaining</h2>
+      {/* eslint-disable-next-line jsx-a11y/no-redundant-roles */}
       <ul role='list' className='todo-list stack-large stack-exception' aria-labelledby='list-heading'>
         {taskList}
       </ul>
