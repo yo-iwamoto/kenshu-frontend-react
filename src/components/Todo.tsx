@@ -1,4 +1,9 @@
-function Todo(props) {
+import type { FC } from 'react';
+import { Task } from '../types/Task';
+
+type Props = Task;
+
+const Todo: FC<Props> = (props) => {
   return (
     <li className='todo stack-small'>
       <div className='c-cb'>
@@ -17,6 +22,6 @@ function Todo(props) {
       </div>
     </li>
   );
-}
+};
 
 export default Todo;

@@ -1,4 +1,6 @@
-function Form() {
+import type { FC } from 'react';
+
+const Form: FC = () => {
   return (
     <form>
       <h2 className='label-wrapper'>
@@ -12,6 +14,6 @@ function Form() {
       </button>
     </form>
   );
-}
+};
 
 export default Form;

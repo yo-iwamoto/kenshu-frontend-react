@@ -1,8 +1,13 @@
 import Todo from './components/Todo';
 import Form from './components/Form';
 import FilterButton from './components/FilterButton';
+import { Task } from './types/Task';
 
-function App(props) {
+type Props = {
+  tasks: Task[];
+};
+
+function App(props: Props) {
   const taskList = props.tasks.map((task) => (
     <Todo id={task.id} name={task.name} completed={task.completed} key={task.id} />
   ));
