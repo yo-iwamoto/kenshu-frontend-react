@@ -13,7 +13,9 @@ type Props = {
 
 function App(props: Props) {
   const [tasks, setTasks] = useState(props.tasks);
+  const [filter, setFilter] = useState<FilterName>('all');
 
+  // ===== task control methods =====
   function addTask(name: string) {
     const newTask = {
       name,
@@ -58,8 +60,7 @@ function App(props: Props) {
     setTasks(editedTasks);
   }
 
-  const [filter, setFilter] = useState<FilterName>('all');
-
+  // ===== inner templates =====
   const taskList = tasks
     .filter(FILTER_MAP[filter])
     .map((task) => (
