@@ -1,4 +1,6 @@
-function FilterButton() {
+import type { FC } from 'react';
+
+const FilterButton: FC = () => {
   return (
     <button type='button' className='btn toggle-btn' aria-pressed='true'>
       <span className='visually-hidden'>Show </span>
@@ -6,6 +8,6 @@ function FilterButton() {
       <span className='visually-hidden'> tasks</span>
     </button>
   );
-}
+};
 
 export default FilterButton;
