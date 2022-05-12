@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import { Task } from './types/Task';
+import type { Task } from './types/Task';
 
 const DATA: Task[] = [
   { id: 'todo-0', name: 'Eat', completed: true },
