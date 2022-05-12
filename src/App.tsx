@@ -6,6 +6,9 @@ import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { FILTER_MAP } from './lib/filter';
 import type { FilterName } from './lib/filter';
+import { useRef } from 'react';
+import { usePrevious } from './hooks/usePrevious';
+import { useEffect } from 'react';
 
 type Props = {
   tasks: Task[];
@@ -60,6 +63,17 @@ function App(props: Props) {
     setTasks(editedTasks);
   }
 
+  // ===== for focus control =====
+  const listHeadingRef = useRef<HTMLHeadingElement>(null);
+
+  const prevTaskLength = usePrevious<number>(tasks.length);
+
+  useEffect(() => {
+    if (prevTaskLength !== undefined && tasks.length - prevTaskLength === -1) {
+      listHeadingRef.current?.focus();
+    }
+  }, [prevTaskLength, tasks.length]);
+
   // ===== inner templates =====
   const taskList = tasks
     .filter(FILTER_MAP[filter])
@@ -88,7 +102,9 @@ function App(props: Props) {
       <h1>TodoMatic</h1>
       <Form addTask={addTask} />
       <div className='filters btn-group stack-exception'>{filterList}</div>
-      <h2 id='list-heading'>{headingText}</h2>
+      <h2 id='list-heading' tabIndex={-1} ref={listHeadingRef}>
+        {headingText}
+      </h2>
       {/* eslint-disable-next-line jsx-a11y/no-redundant-roles */}
       <ul role='list' className='todo-list stack-large stack-exception' aria-labelledby='list-heading'>
         {taskList}
