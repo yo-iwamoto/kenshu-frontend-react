@@ -1,10 +1,14 @@
 import type { FC } from 'react';
 import type { FormEvent } from 'react';
 
-const Form: FC = () => {
+type Props = {
+  addTask: (name: string) => void;
+};
+
+const Form: FC<Props> = (props) => {
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    alert('Hello, world!');
+    props.addTask('Say hello!');
   }
 
   return (
