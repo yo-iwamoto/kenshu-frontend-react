@@ -1,8 +1,14 @@
 import type { FC } from 'react';
+import type { FormEvent } from 'react';
 
 const Form: FC = () => {
+  function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    alert('Hello, world!');
+  }
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <h2 className='label-wrapper'>
         <label htmlFor='new-todo-input' className='label__lg'>
           What needs to be done?
