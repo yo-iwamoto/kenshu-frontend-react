@@ -1,6 +1,17 @@
 import type { ChangeEvent, FC, FormEvent } from 'react';
+import { useEffect } from 'react';
+import { useRef } from 'react';
 import { useState } from 'react';
 import type { Task } from '../types/Task';
+
+function usePrevious(value: boolean) {
+  const ref = useRef<boolean>();
+  useEffect(() => {
+    ref.current = value;
+  }, [value]);
+
+  return ref.current;
+}
 
 type Props = Task & {
   toggleTaskCompleted: (id: string) => void;
@@ -27,13 +38,35 @@ const Todo: FC<Props> = (props) => {
     setIsEditing(false);
   }
 
+  const editFieldRef = useRef<HTMLInputElement>(null);
+  const editButtonRef = useRef<HTMLButtonElement>(null);
+
+  console.log(isEditing);
+  const wasEditingBefore = usePrevious(isEditing);
+
+  useEffect(() => {
+    console.log(wasEditingBefore);
+    if (isEditing) {
+      editFieldRef.current?.focus();
+    } else if (wasEditingBefore) {
+      editButtonRef.current?.focus();
+    }
+  }, [isEditing, wasEditingBefore]);
+
   const editingTemplate = (
     <form className='stack-small' onSubmit={handleSubmit}>
       <div className='form-group'>
         <label className='todo-label' htmlFor={props.id}>
           New name for {props.name}
         </label>
-        <input id={props.id} className='todo-text' type='text' value={newName} onChange={handleChange} />
+        <input
+          id={props.id}
+          className='todo-text'
+          type='text'
+          value={newName}
+          onChange={handleChange}
+          ref={editFieldRef}
+        />
       </div>
       <div className='btn-group'>
         <button type='button' className='btn todo-cancel' onClick={() => cancelEditing()}>
@@ -61,7 +94,7 @@ const Todo: FC<Props> = (props) => {
         </label>
       </div>
       <div className='btn-group'>
-        <button type='button' className='btn' onClick={() => setIsEditing(true)}>
+        <button type='button' className='btn' onClick={() => setIsEditing(true)} ref={editButtonRef}>
           Edit <span className='visually-hidden'>{props.name}</span>
         </button>
         <button type='button' className='btn btn__danger' onClick={() => props.deleteTask(props.id)}>
