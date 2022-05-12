@@ -33,11 +33,9 @@ const Todo: FC<Props> = (props) => {
   const editFieldRef = useRef<HTMLInputElement>(null);
   const editButtonRef = useRef<HTMLButtonElement>(null);
 
-  console.log(isEditing);
   const wasEditingBefore = usePrevious<boolean>(isEditing);
 
   useEffect(() => {
-    console.log(wasEditingBefore);
     if (isEditing) {
       editFieldRef.current?.focus();
     } else if (wasEditingBefore) {
