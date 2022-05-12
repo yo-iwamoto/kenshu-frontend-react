@@ -1,7 +1,7 @@
 import Todo from './components/Todo';
 import Form from './components/Form';
 import FilterButton from './components/FilterButton';
-import { Task } from './types/Task';
+import type { Task } from './types/Task';
 
 type Props = {
   tasks: Task[];
